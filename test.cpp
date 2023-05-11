@@ -112,7 +112,7 @@ TEST(BasicGame, ThreeTurnsEach) {
     EXPECT_THAT(paths,ElementsAre(ElementsAre(Pair(0,5),Pair(1,6))));
 }
 
-TEST(AdvancedGame, AdvancedPaths) {
+TEST(PartialGame, IntermediatePaths) {
     Piece input_board[BOARD_SIZE][BOARD_SIZE];
     for (int i = 0; i < BOARD_SIZE; ++i)
         for (int j = 0; j < BOARD_SIZE; ++j)
@@ -127,6 +127,41 @@ TEST(AdvancedGame, AdvancedPaths) {
 
     auto paths = board.generatePaths("A6");
     EXPECT_THAT(paths,ElementsAre(ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5)),ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1))));
+
+}
+
+TEST(PartialGame, AdvancedPaths) {
+    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    for (int i = 0; i < BOARD_SIZE; ++i)
+        for (int j = 0; j < BOARD_SIZE; ++j)
+                input_board[i][j] = Piece(NONE);
+    input_board[0][5] = Piece(RED);
+    input_board[0][5].setKing();
+    input_board[1][4] = Piece(WHITE);
+    input_board[1][6] = Piece(WHITE);
+    input_board[3][2] = Piece(WHITE);
+    input_board[3][4] = Piece(WHITE);
+    input_board[3][6] = Piece(WHITE);
+    input_board[5][4] = Piece(WHITE);
+    input_board[5][2] = Piece(WHITE);
+    input_board[5][6] = Piece(WHITE);
+
+    Board board(input_board);
+
+    auto paths = board.generatePaths("A6");
+    EXPECT_THAT(
+        paths,
+        ElementsAre(
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,7)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(2,3),Pair(4,1),Pair(6,3)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(6,7)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(2,7)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(6,7)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7))
+        )
+    );
 
 }
 
