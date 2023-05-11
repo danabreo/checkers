@@ -306,7 +306,7 @@ private:
         string selectedPieceLocation;
         vector<vector<pair<int,int>>> paths;
         do {
-            cout << "Player " << curColor << ", enter the location of the piece you would like to move (example: A4): ";
+            cout << "Player " << curColor << ", what piece do you want to move (example: F3): ";
             cin >> selectedPieceLocation;
             if (board.validPiece(curColor, selectedPieceLocation))
                 paths = board.generatePaths(selectedPieceLocation);
@@ -325,7 +325,7 @@ private:
         board.printBoardPaths(paths);
         int selectedPath;
         do {
-            cout << "Enter the number of path you would you like to move through (example: 1): ";
+            cout << "What path do you want to move through (example: 0): ";
             cin >> selectedPath;
         } while (selectedPath < 0 || paths.size() <= selectedPath);
 
