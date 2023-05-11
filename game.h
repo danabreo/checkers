@@ -152,12 +152,12 @@ public:
                 output << " ";
                 if (curPiece.getColor()==RED)
                     if (curPiece.isKing())
-                        output << "🤴🏾";
+                        output << " ♚";
                     else
                         output << "🔴";
                 else if (curPiece.getColor()==WHITE)
                     if (curPiece.isKing())
-                        output << "🤴";
+                        output << " ♔";
                     else
                         output << "⚪️";
                 else if (curPiece.getColor()==NONE)
