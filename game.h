@@ -148,13 +148,19 @@ public:
         for (int i = 0; i < BOARD_SIZE; ++i) {
             output << char('A'+i) << " |";
             for (int j = 0; j < BOARD_SIZE; ++j) {
-                Color curColor = B.getPiece(i,j).getColor();
+                Piece curPiece = B.getPiece(i,j);
                 output << " ";
-                if (curColor==RED)
-                    output << "🔴";
-                else if (curColor==WHITE)
-                    output << "⚪️";
-                else if (curColor==NONE)
+                if (curPiece.getColor()==RED)
+                    if (curPiece.isKing())
+                        output << "🤴🏾";
+                    else
+                        output << "🔴";
+                else if (curPiece.getColor()==WHITE)
+                    if (curPiece.isKing())
+                        output << "🤴";
+                    else
+                        output << "⚪️";
+                else if (curPiece.getColor()==NONE)
                     output << "  ";
             }
             output << endl;
