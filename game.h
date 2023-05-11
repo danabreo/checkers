@@ -72,16 +72,9 @@ public:
     }
 
     // Debugging constructor
-    // Board() {
-    //     for (int i = 0; i < BOARD_SIZE; ++i)
-    //         for (int j = 0; j < BOARD_SIZE; ++j)
-    //                 board[i][j] = Piece(NONE);
-    //     board[0][5] = Piece(RED);
-    //     board[0][5].setKing();
-    //     board[1][4] = Piece(WHITE);
-    //     board[3][2] = Piece(WHITE);
-    //     board[3][4] = Piece(WHITE);
-    // }
+    Board(Piece input_board[BOARD_SIZE][BOARD_SIZE]) {
+        memcpy(board,input_board,sizeof(Piece)*BOARD_SIZE*BOARD_SIZE);
+    }
     vector<vector<pair<int,int>>> generatePaths(string location) {
         vector<vector<pair<int,int>>> paths;
         vector<pair<int,int>> curPath;
@@ -91,7 +84,12 @@ public:
         dfs(curNode, curPath, paths, jump_type, curPiece);
         return paths;
     }
-    bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece) {
+    bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {
+        // Can't move where you came from
+        for (auto pair : curPath)
+            if (pair==make_pair(dest_row,dest_col))
+                return false;
+
         // Dest. location must be in bounds
         if (dest_row < 0 || dest_row >= BOARD_SIZE)
             return false;
@@ -250,45 +248,45 @@ public:
 private:
     void dfs(pair<int,int> curNode, vector<pair<int,int>> curPath, vector<vector<pair<int,int>>>& paths, JUMP_TYPE jump_type, Piece curPiece) {
         if (curPiece.getColor() == NONE) return;
-
+        
         // Push curNode into curPath
         curPath.push_back(curNode);
 
         vector<pair<int,int>> neighbors;
         // If (NONE || CAPTURE) && (can move +2|-2,+2|-2), type=capture
         if (jump_type == JUMP_NONE || jump_type == JUMP_CAPTURE) {
-            if (isValidMove(curNode,curNode.first+2,curNode.second+2,curPiece)) {
+            if (isValidMove(curNode,curNode.first+2,curNode.second+2,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first+2,curNode.second+2));
                 jump_type = JUMP_CAPTURE;
             }
-            if (isValidMove(curNode,curNode.first+2,curNode.second-2,curPiece)) {
+            if (isValidMove(curNode,curNode.first+2,curNode.second-2,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first+2,curNode.second-2));
                 jump_type = JUMP_CAPTURE;
             }
-            if (isValidMove(curNode,curNode.first-2,curNode.second+2,curPiece)) {
+            if (isValidMove(curNode,curNode.first-2,curNode.second+2,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first-2,curNode.second+2));
                 jump_type = JUMP_CAPTURE;
             }
-            if (isValidMove(curNode,curNode.first-2,curNode.second-2,curPiece)) {
+            if (isValidMove(curNode,curNode.first-2,curNode.second-2,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first-2,curNode.second-2));
                 jump_type = JUMP_CAPTURE;
             }
         }
         // If (NONE || NORMAL) && can move +1|-1,+1|-1, type=normal
         if (jump_type == JUMP_NONE) {
-            if (isValidMove(curNode,curNode.first+1,curNode.second+1,curPiece)) {
+            if (isValidMove(curNode,curNode.first+1,curNode.second+1,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first+1,curNode.second+1));
                 jump_type = JUMP_NORMAL;
             }
-            if (isValidMove(curNode,curNode.first+1,curNode.second-1,curPiece)) {
+            if (isValidMove(curNode,curNode.first+1,curNode.second-1,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first+1,curNode.second-1));
                 jump_type = JUMP_NORMAL;
             }
-            if (isValidMove(curNode,curNode.first-1,curNode.second+1,curPiece)) {
+            if (isValidMove(curNode,curNode.first-1,curNode.second+1,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first-1,curNode.second+1));
                 jump_type = JUMP_NORMAL;
             }
-            if (isValidMove(curNode,curNode.first-1,curNode.second-1,curPiece)) {
+            if (isValidMove(curNode,curNode.first-1,curNode.second-1,curPiece,curPath)) {
                 neighbors.push_back(make_pair(curNode.first-1,curNode.second-1));
                 jump_type = JUMP_NORMAL;
             }
