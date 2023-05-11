@@ -28,7 +28,8 @@ enum JUMP_TYPE {
     JUMP_CAPTURE
 };
 
-string PATH_COLORS[] = {"\x1b[33m", "\x1b[34m", "\x1b[35m", "\x1b[36m"};
+string PATH_COLORS[] = {"\x1b[32m", "\x1b[33m", "\x1b[34m", "\x1b[35m"};
+string PATH_PIECES[] = {"🟢","🟡","🔵","🟣"};
 
 class Piece {
 public:
@@ -150,28 +151,23 @@ public:
                 Color curColor = B.getPiece(i,j).getColor();
                 output << " ";
                 if (curColor==RED)
-                    output << "\x1b[31m";
+                    output << "🔴";
                 else if (curColor==WHITE)
-                    output << "\x1b[32m";
-
-                output << curColor;
-                
-                if (curColor==RED || curColor==WHITE)
-                    output << "\x1b[0m";
-                    
-                output << " ";
+                    output << "⚪️";
+                else if (curColor==NONE)
+                    output << "  ";
             }
             output << endl;
         }
         return output;            
     }
     void printBoardPaths(vector<vector<pair<int,int>>> paths) {
-        unordered_map<pair<int,int>,string,pair_hash> pairToColor;
+        unordered_map<pair<int,int>,string,pair_hash> pairToPiece;
         for (int paths_index = 0; paths_index < paths.size(); ++paths_index) {
             auto path = paths[paths_index];
             for (int pair_index = 1; pair_index < path.size(); ++pair_index) {
                 auto pair = path[pair_index];
-                pairToColor[pair] = PATH_COLORS[paths_index];
+                pairToPiece[pair] = PATH_PIECES[paths_index];
             }
         }
         cout << "   ";
@@ -188,17 +184,16 @@ public:
                 Color curColor = getPiece(i,j).getColor();
                 cout << " ";
 
-                if (pairToColor.find(make_pair(i,j))!=pairToColor.end()) {
-                    cout << pairToColor[make_pair(i,j)] << "X";
+                if (pairToPiece.find(make_pair(i,j))!=pairToPiece.end()) {
+                    cout << pairToPiece[make_pair(i,j)];
                 } else {
                     if (curColor==RED)
-                        cout << "\x1b[31m";
+                        cout << "🔴";
                     else if (curColor==WHITE)
-                        cout << "\x1b[32m";
-
-                    cout << curColor;
+                        cout << "⚪️";
+                    else if (curColor==NONE)
+                        cout << "  ";
                 }
-                cout << "\x1b[0m ";
             }
             cout << endl;
         }        
