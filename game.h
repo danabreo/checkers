@@ -184,9 +184,11 @@ public:
                 Color curColor = getPiece(i,j).getColor();
                 cout << " ";
 
-                if (pairToPiece.find(make_pair(i,j))!=pairToPiece.end()) {
+                if (paths[0][0]==make_pair(i,j))
+                    cout << "🔘";
+                else if (pairToPiece.find(make_pair(i,j))!=pairToPiece.end())
                     cout << pairToPiece[make_pair(i,j)];
-                } else {
+                else {
                     if (curColor==RED)
                         cout << "🔴";
                     else if (curColor==WHITE)
