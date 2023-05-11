@@ -70,6 +70,18 @@ public:
             }
         }
     }
+
+    // Debugging constructor
+    // Board() {
+    //     for (int i = 0; i < BOARD_SIZE; ++i)
+    //         for (int j = 0; j < BOARD_SIZE; ++j)
+    //                 board[i][j] = Piece(NONE);
+    //     board[0][5] = Piece(RED);
+    //     board[0][5].setKing();
+    //     board[1][4] = Piece(WHITE);
+    //     board[3][2] = Piece(WHITE);
+    //     board[3][4] = Piece(WHITE);
+    // }
     vector<vector<pair<int,int>>> generatePaths(string location) {
         vector<vector<pair<int,int>>> paths;
         vector<pair<int,int>> curPath;
