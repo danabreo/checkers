@@ -1,6 +1,7 @@
 // Author: Daniel Abreo
 
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <stack>
@@ -28,8 +29,8 @@ enum JUMP_TYPE {
     JUMP_CAPTURE
 };
 
-string PATH_COLORS[] = {"\x1b[32m", "\x1b[33m", "\x1b[34m", "\x1b[35m"};
-string PATH_PIECES[] = {"🟢","🟡","🔵","🟣"};
+string PATH_COLORS[] = {"\x1b[32m", "\x1b[33m", "\x1b[34m", "\x1b[35m","\x1b[30m"};
+string PATH_PIECES[] = {"🟢","🟡","🔵","🟣","⚫️"};
 
 class Piece {
 public:
@@ -183,7 +184,7 @@ public:
             auto path = paths[paths_index];
             for (int pair_index = 1; pair_index < path.size(); ++pair_index) {
                 auto pair = path[pair_index];
-                pairToPiece[pair] = PATH_PIECES[paths_index];
+                pairToPiece[pair] = PATH_PIECES[paths_index%(sizeof(PATH_PIECES)/sizeof(PATH_PIECES[0]))];
             }
         }
         cout << "   ";
@@ -326,6 +327,7 @@ private:
         do {
             cout << "Player " << curColor << ", what piece do you want to move (example: F3): ";
             cin >> selectedPieceLocation;
+            transform(selectedPieceLocation.begin(), selectedPieceLocation.end(), selectedPieceLocation.begin(), ::toupper);
             if (board.validPiece(curColor, selectedPieceLocation))
                 paths = board.generatePaths(selectedPieceLocation);
         } while (paths.size() == 0);
@@ -333,7 +335,7 @@ private:
         // Prompt user for the path they would like to move the piece thorugh
         cout << "Here are the paths you can move through:" << endl;
         for (int i = 0; i < paths.size(); ++i) {
-            cout << PATH_COLORS[i] << "  " << i << ": ";
+            cout << PATH_COLORS[i%(sizeof(PATH_COLORS)/sizeof(PATH_COLORS[0]))] << "  " << i << ": ";
             for (int j = 0; j < paths[i].size(); ++j) {
                 cout << board.getLocationFromIndex(paths[i][j]) << " ";
             } 
