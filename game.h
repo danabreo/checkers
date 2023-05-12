@@ -86,9 +86,13 @@ public:
         return paths;
     }
     bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {
-        // Can't move where you came from
-        for (auto pair : curPath)
-            if (pair==make_pair(dest_row,dest_col))
+        // Can't move where you just came from
+        if (curPath.size()>1 && curPath[curPath.size()-2]==make_pair(dest_row,dest_col))
+            return false;
+        
+        // Can't move over a previous move, again
+        for (int i = 0; i < curPath.size()-1; ++i)
+            if (curPath[i]==start && curPath[i+1]==make_pair(dest_row,dest_col))
                 return false;
 
         // Dest. location must be in bounds

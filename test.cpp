@@ -153,13 +153,16 @@ TEST(PartialGame, AdvancedPaths) {
         paths,
         ElementsAre(
             ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,7)),
-            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
-            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(2,3),Pair(4,1),Pair(6,3)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3),Pair(4,5),Pair(6,7)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3),Pair(4,5),Pair(2,7)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(6,7)),
+            ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7)),
             ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(6,7)),
-            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
             ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5),Pair(2,7)),
             ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(6,7)),
-            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7))
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7)),
+            ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,3))
         )
     );
 
