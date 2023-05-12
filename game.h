@@ -280,22 +280,15 @@ private:
         }
         // If (NONE || NORMAL) && can move +1|-1,+1|-1, type=normal
         if (jump_type == JUMP_NONE) {
-            if (isValidMove(curNode,curNode.first+1,curNode.second+1,initialPiece,curPath)) {
+            if (isValidMove(curNode,curNode.first+1,curNode.second+1,initialPiece,curPath))
                 neighbors.push_back(make_pair(curNode.first+1,curNode.second+1));
-                jump_type = JUMP_NORMAL;
-            }
-            if (isValidMove(curNode,curNode.first+1,curNode.second-1,initialPiece,curPath)) {
+            if (isValidMove(curNode,curNode.first+1,curNode.second-1,initialPiece,curPath))
                 neighbors.push_back(make_pair(curNode.first+1,curNode.second-1));
-                jump_type = JUMP_NORMAL;
-            }
-            if (isValidMove(curNode,curNode.first-1,curNode.second+1,initialPiece,curPath)) {
+            if (isValidMove(curNode,curNode.first-1,curNode.second+1,initialPiece,curPath))
                 neighbors.push_back(make_pair(curNode.first-1,curNode.second+1));
-                jump_type = JUMP_NORMAL;
-            }
-            if (isValidMove(curNode,curNode.first-1,curNode.second-1,initialPiece,curPath)) {
+            if (isValidMove(curNode,curNode.first-1,curNode.second-1,initialPiece,curPath))
                 neighbors.push_back(make_pair(curNode.first-1,curNode.second-1));
-                jump_type = JUMP_NORMAL;
-            }
+            jump_type = JUMP_NORMAL;
         }
 
         // if no neighbors, push curPath into paths
