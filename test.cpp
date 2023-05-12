@@ -153,6 +153,56 @@ TEST(PartialGame, IntermediatePaths2) {
     );
 }
 
+TEST(PartialGame, IntermediatePaths3) {
+    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    for (int i = 0; i < BOARD_SIZE; ++i)
+        for (int j = 0; j < BOARD_SIZE; ++j)
+                input_board[i][j] = Piece(NONE);
+    input_board[2][3] = Piece(RED);
+    input_board[2][3].setKing();
+    input_board[3][2] = Piece(WHITE);
+    input_board[3][4] = Piece(WHITE);
+    input_board[3][6] = Piece(WHITE);
+    input_board[5][4] = Piece(WHITE);
+    input_board[5][2] = Piece(WHITE);
+
+    Board board(input_board);
+
+    auto paths = board.generatePaths("C4");
+    EXPECT_THAT(
+        paths,
+        ElementsAre(
+            ElementsAre(Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
+            ElementsAre(Pair(2,3),Pair(4,5),Pair(2,7)),
+            ElementsAre(Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7)),
+            ElementsAre(Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,3))
+        )
+    );
+}
+
+TEST(PartialGame, IntermediatePaths4) {
+    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    for (int i = 0; i < BOARD_SIZE; ++i)
+        for (int j = 0; j < BOARD_SIZE; ++j)
+                input_board[i][j] = Piece(NONE);
+    input_board[6][1] = Piece(RED);
+    input_board[6][1].setKing();
+    input_board[5][2] = Piece(WHITE);
+    input_board[5][4] = Piece(WHITE);
+    input_board[5][6] = Piece(WHITE);
+    input_board[3][6] = Piece(WHITE);
+    input_board[1][4] = Piece(WHITE);
+    input_board[1][2] = Piece(WHITE);
+
+    Board board(input_board);
+
+    auto paths = board.generatePaths("G2");
+    EXPECT_THAT(
+        paths,
+        ElementsAre(ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5),Pair(4,7),Pair(2,5),Pair(0,3),Pair(2,1)))
+    );
+}
+
 TEST(PartialGame, AdvancedPaths) {
     Piece input_board[BOARD_SIZE][BOARD_SIZE];
     for (int i = 0; i < BOARD_SIZE; ++i)
