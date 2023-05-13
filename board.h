@@ -33,7 +33,7 @@ public:
     Board(Piece input_board[BOARD_SIZE][BOARD_SIZE]) {
         memcpy(board,input_board,sizeof(Piece)*BOARD_SIZE*BOARD_SIZE);
     }
-    vector<vector<pair<int,int>>> generatePaths(string location) {
+    vector<vector<pair<int,int>>> generatePaths(const string& location) {
         vector<vector<pair<int,int>>> paths;
         vector<pair<int,int>> curPath;
         pair<int,int> curNode = getIndexFromLocation(location);
@@ -41,7 +41,7 @@ public:
         dfs(curNode, curPath, paths, JUMP_NONE, initialPiece);
         return paths;
     }
-    bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {
+    bool isValidMove(const pair<int,int> start, int dest_row, int dest_col, Piece curPiece, const vector<pair<int,int>>& curPath) {
         // Dest. location must be in bounds
         if (dest_row < 0 || dest_row >= BOARD_SIZE)
             return false;
@@ -81,7 +81,7 @@ public:
                     ++count;
         return count;
     }
-    bool validPiece(Color curColor, string location) {
+    bool validPiece(Color curColor, const string& location) {
         // Check length
         if (location.size() != 2)
             return false;
@@ -135,7 +135,7 @@ public:
         }
         return output;            
     }
-    void printBoardPaths(vector<vector<pair<int,int>>> paths) {
+    void printBoardPaths(const vector<vector<pair<int,int>>>& paths) {
         unordered_map<pair<int,int>,string,pair_hash> pairToPiece;
         for (int paths_index = 0; paths_index < paths.size(); ++paths_index) {
             auto path = paths[paths_index];
@@ -174,7 +174,7 @@ public:
             cout << endl;
         }        
     }
-    pair<int,int> getIndexFromLocation(string location) {
+    pair<int,int> getIndexFromLocation(const string& location) {
         int row = location[0]-'A';
         int col = location[1]-'1';
         return make_pair(row,col);
@@ -192,7 +192,7 @@ public:
         }
         board[startLocation.first][startLocation.second].remove();
     }
-    void executePath(vector<pair<int,int>> path) {
+    void executePath(const vector<pair<int,int>>& path) {
         pair<int,int> curLocation = path[0];
         for (int i = 1; i < path.size(); ++i) {
             if (abs(curLocation.first - path[i].first)==2) {
