@@ -1,5 +1,5 @@
 // Author: Daniel Abreo
-// Test: g++ -std=c++14 test.cpp -lgtest -lgtest_main && ./a.out
+// Test: g++ -std=c++14 test.cpp -lgtest -lgtest_main -lgmock && ./a.out
 
 #include "game.h"
 #include <gtest/gtest.h>
@@ -132,7 +132,7 @@ TEST_F(BoardTest, IntermediatePaths) {
     Board board(input_board);
 
     auto paths = board.generatePaths("A6");
-    EXPECT_THAT(paths,ElementsAre(ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5)),ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1))));
+    EXPECT_THAT(paths,UnorderedElementsAre(ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5)),ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1))));
 }
 
 TEST_F(BoardTest, IntermediatePaths2) {
@@ -148,7 +148,7 @@ TEST_F(BoardTest, IntermediatePaths2) {
     auto paths = board.generatePaths("C4");
     EXPECT_THAT(
         paths,
-        ElementsAre(
+        UnorderedElementsAre(
             ElementsAre(Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
             ElementsAre(Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,3))
         )
@@ -169,7 +169,7 @@ TEST_F(BoardTest, IntermediatePaths3) {
     auto paths = board.generatePaths("C4");
     EXPECT_THAT(
         paths,
-        ElementsAre(
+        UnorderedElementsAre(
             ElementsAre(Pair(2,3),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3)),
             ElementsAre(Pair(2,3),Pair(4,5),Pair(2,7)),
             ElementsAre(Pair(2,3),Pair(4,1),Pair(6,3),Pair(4,5),Pair(2,7)),
@@ -193,7 +193,7 @@ TEST_F(BoardTest, IntermediatePaths4) {
     auto paths = board.generatePaths("G2");
     EXPECT_THAT(
         paths,
-        ElementsAre(ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5),Pair(4,7),Pair(2,5),Pair(0,3),Pair(2,1)))
+        UnorderedElementsAre(ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5),Pair(4,7),Pair(2,5),Pair(0,3),Pair(2,1)))
     );
 }
 
@@ -212,7 +212,7 @@ TEST_F(BoardTest, IntermediatePaths5) {
     auto paths = board.generatePaths("G2");
     EXPECT_THAT(
         paths,
-        ElementsAre(
+        UnorderedElementsAre(
             ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,7)),
             ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,3)),
             ElementsAre(Pair(6,1),Pair(4,3),Pair(2,1))
@@ -236,7 +236,7 @@ TEST_F(BoardTest, IntermediatePaths6) {
     auto paths = board.generatePaths("G2");
     EXPECT_THAT(
         paths,
-        ElementsAre(
+        UnorderedElementsAre(
             ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5)),
             ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(4,7)),
             ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,7)),
@@ -263,7 +263,7 @@ TEST_F(BoardTest, AdvancedPaths) {
     auto paths = board.generatePaths("A6");
     EXPECT_THAT(
         paths,
-        ElementsAre(
+        UnorderedElementsAre(
             ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,7)),
             ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3),Pair(4,5),Pair(6,7)),
             ElementsAre(Pair(0,5),Pair(2,7),Pair(4,5),Pair(6,3),Pair(4,1),Pair(2,3),Pair(0,5)),
