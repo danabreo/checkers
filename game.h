@@ -46,10 +46,14 @@ private:
         cout << "===========================" << endl;
         board.printBoardPaths(paths);
         int selectedPath;
-        do {
+        while (true) {
             cout << "What path do you want to move through (example: 0): ";
             cin >> selectedPath;
-        } while (selectedPath < 0 || paths.size() <= selectedPath);
+            if (!cin.fail() && selectedPath >= 0 && selectedPath < paths.size())
+                break;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
 
         // Execute the selected move
         board.executePath(paths[selectedPath]);
