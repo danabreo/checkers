@@ -42,18 +42,18 @@ public:
         dfs(curNode, curPath, paths, jump_type, initialPiece);
         return paths;
     }
-    bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {        
-        // Can't move over a previous move, again
-        for (int i = 0; i < curPath.size()-1; ++i)
-            if ((curPath[i]==start && curPath[i+1]==make_pair(dest_row,dest_col)) ||
-                (curPath[i+1]==start && curPath[i]==make_pair(dest_row,dest_col)))
-                return false;
-
+    bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {
         // Dest. location must be in bounds
         if (dest_row < 0 || dest_row >= BOARD_SIZE)
             return false;
         if (dest_col < 0 || dest_col >= BOARD_SIZE)
             return false;
+
+        // Can't move over a previous move, again
+        for (int i = 0; i < curPath.size()-1; ++i)
+            if ((curPath[i]==start && curPath[i+1]==make_pair(dest_row,dest_col)) ||
+                (curPath[i+1]==start && curPath[i]==make_pair(dest_row,dest_col)))
+                return false;
 
         // Dest. location must be empty, or the initial jumping piece's location
         if (getPiece(dest_row, dest_col).getColor() != NONE && (curPath[0]!=make_pair(dest_row,dest_col)))
@@ -76,12 +76,10 @@ public:
     }
     int numPieces(Color color) {
         int count = 0;
-        for (int i = 0; i < BOARD_SIZE; ++i) {
-            for (int j = 0; j < BOARD_SIZE; ++j) {
+        for (int i = 0; i < BOARD_SIZE; ++i)
+            for (int j = 0; j < BOARD_SIZE; ++j)
                 if (board[i][j].getColor() == color)
                     ++count;
-            }
-        }
         return count;
     }
     bool validPiece(Color curColor, string location) {
