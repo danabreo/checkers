@@ -203,6 +203,63 @@ TEST(PartialGame, IntermediatePaths4) {
     );
 }
 
+TEST(PartialGame, IntermediatePaths5) {
+    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    for (int i = 0; i < BOARD_SIZE; ++i)
+        for (int j = 0; j < BOARD_SIZE; ++j)
+                input_board[i][j] = Piece(NONE);
+    input_board[6][1] = Piece(RED);           
+    input_board[1][6] = Piece(WHITE);
+    input_board[3][6] = Piece(WHITE);
+    input_board[3][2] = Piece(WHITE);
+    input_board[3][4] = Piece(WHITE);
+    input_board[5][2] = Piece(WHITE);
+    input_board[5][4] = Piece(WHITE);
+    input_board[1][4] = Piece(WHITE);
+
+    Board board(input_board);
+
+    auto paths = board.generatePaths("G2");
+    EXPECT_THAT(
+        paths,
+        ElementsAre(
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,7)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,3)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,1))
+        )
+    );
+}
+
+TEST(PartialGame, IntermediatePaths6) {
+    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    for (int i = 0; i < BOARD_SIZE; ++i)
+        for (int j = 0; j < BOARD_SIZE; ++j)
+                input_board[i][j] = Piece(NONE);
+    input_board[6][1] = Piece(RED);  
+    input_board[6][1].setKing();          
+    input_board[1][6] = Piece(WHITE);
+    input_board[3][6] = Piece(WHITE);
+    input_board[3][2] = Piece(WHITE);
+    input_board[3][4] = Piece(WHITE);
+    input_board[5][2] = Piece(WHITE);
+    input_board[5][4] = Piece(WHITE);
+    input_board[1][4] = Piece(WHITE);
+
+    Board board(input_board);
+
+    auto paths = board.generatePaths("G2");
+    EXPECT_THAT(
+        paths,
+        ElementsAre(
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(4,7)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,7)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,5),Pair(0,3)),
+            ElementsAre(Pair(6,1),Pair(4,3),Pair(2,1))
+        )
+    );
+}
+
 TEST(PartialGame, AdvancedPaths) {
     Piece input_board[BOARD_SIZE][BOARD_SIZE];
     for (int i = 0; i < BOARD_SIZE; ++i)
