@@ -100,6 +100,8 @@ public:
         return true;
     }
     Piece getPiece(int row, int col) const {
+        if (row<0 || row>=BOARD_SIZE || col<0 || col>=BOARD_SIZE)
+            throw(out_of_range("Accessing piece outside board bounds"));
         return board[row][col];
     }
     friend ostream &operator<<(ostream &output, const Board &B) {
