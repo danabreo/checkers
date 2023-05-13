@@ -27,7 +27,7 @@ private:
         string selectedPieceLocation;
         vector<vector<pair<int,int>>> paths;
         do {
-            cout << "Player " << curColor << ", what piece do you want to move (example: F3): ";
+            cout << "Player " << curColor << ", what piece do you want to move (ex: F3): ";
             cin >> selectedPieceLocation;
             transform(selectedPieceLocation.begin(), selectedPieceLocation.end(), selectedPieceLocation.begin(), ::toupper);
             if (board.validPiece(curColor, selectedPieceLocation))
@@ -47,7 +47,7 @@ private:
         board.printBoardPaths(paths);
         int selectedPath;
         while (true) {
-            cout << "What path do you want to move through (example: 0): ";
+            cout << "What path do you want to move through (ex: 0): ";
             cin >> selectedPath;
             if (!cin.fail() && selectedPath >= 0 && selectedPath < paths.size())
                 break;
