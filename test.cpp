@@ -117,35 +117,35 @@ protected:
     void SetUp() override {
         for (int i = 0; i < BOARD_SIZE; ++i)
             for (int j = 0; j < BOARD_SIZE; ++j)
-                    input_board[i][j] = Piece(NONE);
+                    board[i][j] = Piece(NONE);
     }
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
+    Piece board[BOARD_SIZE][BOARD_SIZE];
 };
 
 TEST_F(BoardTest, IntermediatePaths) {
-    input_board[0][5] = Piece(RED);
-    input_board[0][5].setKing();
-    input_board[1][4] = Piece(WHITE);
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
+    board[0][5] = Piece(RED);
+    board[0][5].setKing();
+    board[1][4] = Piece(WHITE);
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("A6");
+    auto paths = test_board.generatePaths("A6");
     EXPECT_THAT(paths,UnorderedElementsAre(ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5)),ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1))));
 }
 
 TEST_F(BoardTest, IntermediatePaths2) {
-    input_board[2][3] = Piece(RED);
-    input_board[2][3].setKing();
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[5][2] = Piece(WHITE);
+    board[2][3] = Piece(RED);
+    board[2][3].setKing();
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[5][2] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("C4");
+    auto paths = test_board.generatePaths("C4");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(
@@ -156,17 +156,17 @@ TEST_F(BoardTest, IntermediatePaths2) {
 }
 
 TEST_F(BoardTest, IntermediatePaths3) {
-    input_board[2][3] = Piece(RED);
-    input_board[2][3].setKing();
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
-    input_board[3][6] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[5][2] = Piece(WHITE);
+    board[2][3] = Piece(RED);
+    board[2][3].setKing();
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
+    board[3][6] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[5][2] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("C4");
+    auto paths = test_board.generatePaths("C4");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(
@@ -179,18 +179,18 @@ TEST_F(BoardTest, IntermediatePaths3) {
 }
 
 TEST_F(BoardTest, IntermediatePaths4) {
-    input_board[6][1] = Piece(RED);
-    input_board[6][1].setKing();
-    input_board[5][2] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[5][6] = Piece(WHITE);
-    input_board[3][6] = Piece(WHITE);
-    input_board[1][4] = Piece(WHITE);
-    input_board[1][2] = Piece(WHITE);
+    board[6][1] = Piece(RED);
+    board[6][1].setKing();
+    board[5][2] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[5][6] = Piece(WHITE);
+    board[3][6] = Piece(WHITE);
+    board[1][4] = Piece(WHITE);
+    board[1][2] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("G2");
+    auto paths = test_board.generatePaths("G2");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(ElementsAre(Pair(6,1),Pair(4,3),Pair(6,5),Pair(4,7),Pair(2,5),Pair(0,3),Pair(2,1)))
@@ -198,18 +198,18 @@ TEST_F(BoardTest, IntermediatePaths4) {
 }
 
 TEST_F(BoardTest, IntermediatePaths5) {
-    input_board[6][1] = Piece(RED);           
-    input_board[1][6] = Piece(WHITE);
-    input_board[3][6] = Piece(WHITE);
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
-    input_board[5][2] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[1][4] = Piece(WHITE);
+    board[6][1] = Piece(RED);           
+    board[1][6] = Piece(WHITE);
+    board[3][6] = Piece(WHITE);
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
+    board[5][2] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[1][4] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("G2");
+    auto paths = test_board.generatePaths("G2");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(
@@ -221,19 +221,19 @@ TEST_F(BoardTest, IntermediatePaths5) {
 }
 
 TEST_F(BoardTest, IntermediatePaths6) {
-    input_board[6][1] = Piece(RED);  
-    input_board[6][1].setKing();          
-    input_board[1][6] = Piece(WHITE);
-    input_board[3][6] = Piece(WHITE);
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
-    input_board[5][2] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[1][4] = Piece(WHITE);
+    board[6][1] = Piece(RED);  
+    board[6][1].setKing();          
+    board[1][6] = Piece(WHITE);
+    board[3][6] = Piece(WHITE);
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
+    board[5][2] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[1][4] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("G2");
+    auto paths = test_board.generatePaths("G2");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(
@@ -247,20 +247,20 @@ TEST_F(BoardTest, IntermediatePaths6) {
 }
 
 TEST_F(BoardTest, AdvancedPaths) {
-    input_board[0][5] = Piece(RED);
-    input_board[0][5].setKing();
-    input_board[1][4] = Piece(WHITE);
-    input_board[1][6] = Piece(WHITE);
-    input_board[3][2] = Piece(WHITE);
-    input_board[3][4] = Piece(WHITE);
-    input_board[3][6] = Piece(WHITE);
-    input_board[5][4] = Piece(WHITE);
-    input_board[5][2] = Piece(WHITE);
-    input_board[5][6] = Piece(WHITE);
+    board[0][5] = Piece(RED);
+    board[0][5].setKing();
+    board[1][4] = Piece(WHITE);
+    board[1][6] = Piece(WHITE);
+    board[3][2] = Piece(WHITE);
+    board[3][4] = Piece(WHITE);
+    board[3][6] = Piece(WHITE);
+    board[5][4] = Piece(WHITE);
+    board[5][2] = Piece(WHITE);
+    board[5][6] = Piece(WHITE);
 
-    Board board(input_board);
+    Board test_board(board);
 
-    auto paths = board.generatePaths("A6");
+    auto paths = test_board.generatePaths("A6");
     EXPECT_THAT(
         paths,
         UnorderedElementsAre(
