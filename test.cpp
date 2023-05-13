@@ -112,11 +112,17 @@ TEST(BasicGame, ThreeTurnsEach) {
     EXPECT_THAT(paths,ElementsAre(ElementsAre(Pair(0,5),Pair(1,6))));
 }
 
-TEST(PartialGame, IntermediatePaths) {
+class BoardTest : public testing::Test {
+protected:
+    void SetUp() override {
+        for (int i = 0; i < BOARD_SIZE; ++i)
+            for (int j = 0; j < BOARD_SIZE; ++j)
+                    input_board[i][j] = Piece(NONE);
+    }
     Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+};
+
+TEST_F(BoardTest, IntermediatePaths) {
     input_board[0][5] = Piece(RED);
     input_board[0][5].setKing();
     input_board[1][4] = Piece(WHITE);
@@ -129,11 +135,7 @@ TEST(PartialGame, IntermediatePaths) {
     EXPECT_THAT(paths,ElementsAre(ElementsAre(Pair(0,5),Pair(2,3),Pair(4,5)),ElementsAre(Pair(0,5),Pair(2,3),Pair(4,1))));
 }
 
-TEST(PartialGame, IntermediatePaths2) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, IntermediatePaths2) {
     input_board[2][3] = Piece(RED);
     input_board[2][3].setKing();
     input_board[3][2] = Piece(WHITE);
@@ -153,11 +155,7 @@ TEST(PartialGame, IntermediatePaths2) {
     );
 }
 
-TEST(PartialGame, IntermediatePaths3) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, IntermediatePaths3) {
     input_board[2][3] = Piece(RED);
     input_board[2][3].setKing();
     input_board[3][2] = Piece(WHITE);
@@ -180,11 +178,7 @@ TEST(PartialGame, IntermediatePaths3) {
     );
 }
 
-TEST(PartialGame, IntermediatePaths4) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, IntermediatePaths4) {
     input_board[6][1] = Piece(RED);
     input_board[6][1].setKing();
     input_board[5][2] = Piece(WHITE);
@@ -203,11 +197,7 @@ TEST(PartialGame, IntermediatePaths4) {
     );
 }
 
-TEST(PartialGame, IntermediatePaths5) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, IntermediatePaths5) {
     input_board[6][1] = Piece(RED);           
     input_board[1][6] = Piece(WHITE);
     input_board[3][6] = Piece(WHITE);
@@ -230,11 +220,7 @@ TEST(PartialGame, IntermediatePaths5) {
     );
 }
 
-TEST(PartialGame, IntermediatePaths6) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, IntermediatePaths6) {
     input_board[6][1] = Piece(RED);  
     input_board[6][1].setKing();          
     input_board[1][6] = Piece(WHITE);
@@ -260,11 +246,7 @@ TEST(PartialGame, IntermediatePaths6) {
     );
 }
 
-TEST(PartialGame, AdvancedPaths) {
-    Piece input_board[BOARD_SIZE][BOARD_SIZE];
-    for (int i = 0; i < BOARD_SIZE; ++i)
-        for (int j = 0; j < BOARD_SIZE; ++j)
-                input_board[i][j] = Piece(NONE);
+TEST_F(BoardTest, AdvancedPaths) {
     input_board[0][5] = Piece(RED);
     input_board[0][5].setKing();
     input_board[1][4] = Piece(WHITE);
