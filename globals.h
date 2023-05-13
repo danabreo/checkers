@@ -1,7 +1,5 @@
 // Author: Daniel Abreo
 
-#include <string>
-
 const int BOARD_SIZE = 8;
 
 enum Color {

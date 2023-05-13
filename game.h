@@ -1,10 +1,7 @@
 // Author: Daniel Abreo
 
-#include <iostream>
 #include <algorithm>
-#include <string>
 #include <vector>
-#include <stack>
 
 #include "board.h"
 
