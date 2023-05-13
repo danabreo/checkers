@@ -1,5 +1,8 @@
 // Author: Daniel Abreo
 
+#ifndef GAME_H
+#define GAME_H
+
 #include <algorithm>
 #include <vector>
 
@@ -66,3 +69,5 @@ private:
     Color curColor;
     Board board;
 };
+
+#endif // GAME_H

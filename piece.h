@@ -1,5 +1,8 @@
 // Author: Daniel Abreo
 
+#ifndef PIECE_H
+#define PIECE_H
+
 #include "globals.h"
 
 class Piece {
@@ -26,3 +29,5 @@ private:
     Color color;
     bool king;
 };
+
+#endif // PIECE_H

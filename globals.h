@@ -1,5 +1,8 @@
 // Author: Daniel Abreo
 
+#ifndef GLOBALS_H
+#define GLOBALS_H
+
 const int BOARD_SIZE = 8;
 
 enum Color {
@@ -16,3 +19,5 @@ enum JUMP_TYPE {
 
 std::string PATH_COLORS[] = {"\x1b[32m", "\x1b[33m", "\x1b[34m", "\x1b[35m","\x1b[30m"};
 std::string PATH_PIECES[] = {"🟢","🟡","🔵","🟣","⚫️"};
+
+#endif // GLOBALS_H

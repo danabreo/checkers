@@ -1,5 +1,8 @@
 // Author: Daniel Abreo
 
+#ifndef BOARD_H
+#define BOARD_H
+
 #include <iostream>
 
 #include "piece.h"
@@ -254,3 +257,5 @@ private:
     
     Piece board[BOARD_SIZE][BOARD_SIZE];
 };
+
+#endif // BOARD_H
