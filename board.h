@@ -37,9 +37,8 @@ public:
         vector<vector<pair<int,int>>> paths;
         vector<pair<int,int>> curPath;
         pair<int,int> curNode = getIndexFromLocation(location);
-        JUMP_TYPE jump_type = JUMP_NONE;
         Piece initialPiece = getPiece(curNode.first,curNode.second);
-        dfs(curNode, curPath, paths, jump_type, initialPiece);
+        dfs(curNode, curPath, paths, JUMP_NONE, initialPiece);
         return paths;
     }
     bool isValidMove(pair<int,int> start, int dest_row, int dest_col, Piece curPiece, vector<pair<int,int>> curPath) {
@@ -60,10 +59,10 @@ public:
             return false;
 
         // If start piece is white and not king, dest_row > start.first
-        if (curPiece.getColor() == WHITE && !curPiece.isKing() && dest_row <= start.first)
+        if (curPiece.getColor() == WHITE && !curPiece.isKing() && dest_row < start.first)
             return false;
         // If start piece is red and not king, dest_row < start.first
-        if (curPiece.getColor() == RED && !curPiece.isKing() && dest_row >= start.first)
+        if (curPiece.getColor() == RED && !curPiece.isKing() && dest_row > start.first)
             return false;
 
         // If move is a jump, jumped piece must be different color
